@@ -28,16 +28,19 @@ jobs:
           key: pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
           paths:
             - node_modules
+
+      - node/test:
       
       - run:
-          name: Build and test the app
+          name: Build the app
           command: |
             pnpm build
-            pnpm test
 
 workflows:
   build-and-test:
     jobs:
+      - node/test:
+          test-results-for: jest
       - build-test:
           filters:
             branches:
