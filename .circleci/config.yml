@@ -28,8 +28,6 @@ workflows:
   build-and-test:
     jobs:
       - build-test
-      - node/test:
-          test-results-for: jest
       - deploy:
           requires:
             - "build-test"
