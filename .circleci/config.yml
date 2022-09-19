@@ -1,9 +1,16 @@
 version: 2.1
 
 orbs:
-    heroku: circleci/heroku@1.2.6
+  heroku: circleci/heroku@1.2.6
+  node: circleci/node@5.0.2
 
 jobs:
+  build-test:
+    executor: node/default
+    steps:
+      - node/install
+      - node/build
+      - node/test
   deploy:
     executor: heroku/default
     steps:
@@ -23,4 +30,4 @@ workflows:
           test-results-for: jest
       - deploy:
           requires:
-            - "node/test"
+            - "build-test"
