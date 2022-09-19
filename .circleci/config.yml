@@ -29,8 +29,6 @@ jobs:
           paths:
             - node_modules
 
-      - node/test:
-      
       - run:
           name: Build the app
           command: |
