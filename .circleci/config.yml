@@ -11,7 +11,6 @@ jobs:
       - node/install
       - run:
           command: npm run build
-      - node/test
   deploy:
     executor: heroku/default
     steps:
@@ -28,6 +27,9 @@ workflows:
   build-and-test:
     jobs:
       - build-test
+      - node/test:
+          test-results-for: jest
+
       - deploy:
           requires:
             - "build-test"
