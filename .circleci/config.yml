@@ -9,7 +9,8 @@ jobs:
     executor: node/default
     steps:
       - node/install
-      - node/build
+      - run:
+          command: npm run build
       - node/test
   deploy:
     executor: heroku/default
