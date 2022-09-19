@@ -6,12 +6,14 @@ orbs:
 
 jobs:
   build-test:
-    executor: node/default
+    docker:
+      - image: cimg/node:16
     steps:
       - checkout
-      - node/install
       - run:
-          command: npm run build
+          command: |
+            npm ci
+            npm run build
   deploy:
     executor: heroku/default
     steps:
