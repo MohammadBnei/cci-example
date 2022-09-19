@@ -8,6 +8,7 @@ jobs:
   build-test:
     executor: node/default
     steps:
+      - checkout
       - node/install
       - run:
           command: npm run build
@@ -33,3 +34,4 @@ workflows:
       - deploy:
           requires:
             - "build-test"
+            - "node/test"
