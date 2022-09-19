@@ -1,9 +1,12 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@5.1
+
 jobs:
   build-test: # this can be any name you choose
     docker:
-      - image: cimg/node@16
+      - image: cimg/node:16
 
     steps:
       - checkout
@@ -31,3 +34,12 @@ jobs:
           command: |
             pnpm build
             pnpm test
+
+workflows:
+  build-and-test:
+    jobs:
+      - build-test:
+          filters:
+            branches:
+              only:
+                - main
