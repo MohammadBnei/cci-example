@@ -24,7 +24,7 @@ jobs:
             echo "The command above installs Heroku, the command below deploys.
             What you do inbetween is up to you!"
       - heroku/deploy-via-git:
-          app-name: joke-app-iw2
+          app-name: joke-app-iw3
 
 workflows:
   build-and-test:
