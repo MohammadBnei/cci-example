@@ -26,6 +26,23 @@ jobs:
       - heroku/deploy-via-git:
           app-name: joke-app-iw3
 
+  build-docker:
+    docker:
+      - image: cimg/base:2022.06
+        auth:
+          username: mohammaddocker
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      # build and push Docker image
+      - run: |
+          TAG=latest
+          docker build -t mohammaddocker/joke-api-cci:$TAG .
+          echo $DOCKERHUB_PASSWORD | docker login -u mohammaddocker --password-stdin
+          docker push mohammaddocker/joke-api-cci:$TAG
+
 workflows:
   build-and-test:
     jobs:
