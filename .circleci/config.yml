@@ -34,7 +34,8 @@ jobs:
           password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          docker_layer_caching: true
 
       # build and push Docker image
       - run: |
@@ -50,10 +51,10 @@ workflows:
       - node/test:
           test-results-for: jest
 
-      - deploy:
-          requires:
-            - "build-test"
-            - "node/test"
+      # - deploy:
+          # requires:
+          #   - "build-test"
+          #   - "node/test"
 
       - build-docker:
           requires:
