@@ -31,7 +31,7 @@ jobs:
       - image: cimg/base:2022.06
         auth:
           username: mohammaddocker
-          password: $DOCKERHUB_PASSWORD
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - setup_remote_docker:
@@ -41,7 +41,7 @@ jobs:
       - run: |
           TAG=latest
           docker build -t mohammaddocker/joke-api-cci:$TAG .
-          docker login -u mohammaddocker -p $DOCKERHUB_PASSWORD
+          docker login -u mohammaddocker -p $DOCKER_PASSWORD
           docker push mohammaddocker/joke-api-cci:$TAG
 
 workflows:
