@@ -40,7 +40,7 @@ jobs:
       - run: |
           TAG=latest
           docker build -t mohammaddocker/joke-api-cci:$TAG .
-          echo $DOCKERHUB_PASSWORD | docker login -u mohammaddocker --password-stdin
+          docker login -u mohammaddocker -p $DOCKERHUB_PASSWORD
           docker push mohammaddocker/joke-api-cci:$TAG
 
 workflows:
@@ -54,7 +54,7 @@ workflows:
           requires:
             - "build-test"
             - "node/test"
-            
+
       - build-docker:
           requires:
             - "build-test"
