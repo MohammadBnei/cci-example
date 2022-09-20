@@ -54,3 +54,8 @@ workflows:
           requires:
             - "build-test"
             - "node/test"
+            
+      - build-docker:
+          requires:
+            - "build-test"
+            - "node/test"
